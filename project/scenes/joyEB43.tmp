@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxh45v7tvmpxd"]
+
+[ext_resource type="Script" path="res://scripts/joystick.gd" id="1_auoi1"]
+[ext_resource type="Texture2D" uid="uid://bidhxucp2kd66" path="res://assets/sprites/joystick/joyring.png" id="2_0ah50"]
+[ext_resource type="Texture2D" uid="uid://hg42snfhm6ei" path="res://assets/sprites/joystick/joyknobpng.png" id="3_nduxk"]
+[ext_resource type="Script" path="res://scripts/joystick_knob.gd" id="4_5aml2"]
+
+[node name="joystick" type="Node2D"]
+scale = Vector2(0.015, 0.015)
+script = ExtResource("1_auoi1")
+
+[node name="Joyring" type="Sprite2D" parent="."]
+texture = ExtResource("2_0ah50")
+
+[node name="JoystickKnob" type="Sprite2D" parent="Joyring"]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("3_nduxk")
+script = ExtResource("4_5aml2")
+maxLength = 0
+deadzone = null
+
+[node name="Button" type="Button" parent="Joyring"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 0.504
+anchor_top = 0.5
+anchor_right = 0.504
+anchor_bottom = 0.5
+offset_left = -1897.68
+offset_top = -1889.0
+offset_right = -24.6799
+offset_bottom = -23.0

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bxsilg3c6qn0h" path="res://scenes/killzone.tscn" id="5_5gvrq"]
 [ext_resource type="PackedScene" uid="uid://bb2dm5tlb1pv8" path="res://scenes/slime.tscn" id="6_r7crw"]
 [ext_resource type="FontFile" uid="uid://wkifjsriqeat" path="res://assets/fonts/PixelOperator8.ttf" id="7_ttj4a"]
-[ext_resource type="PackedScene" uid="uid://4au3abyy3ug6" path="res://scenes/ui/ui.tscn" id="10_y6l3y"]
+[ext_resource type="PackedScene" uid="uid://dxh45v7tvmpxd" path="res://scenes/joystick.tscn" id="10_pyid6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eddx5"]
 texture = ExtResource("2_6x0pj")
@@ -293,6 +293,10 @@ zoom = Vector2(4, 4)
 limit_bottom = 180
 position_smoothing_enabled = true
 
+[node name="joystick" parent="Player/Camera2D" instance=ExtResource("10_pyid6")]
+z_index = 5
+position = Vector2(-111, 54)
+
 [node name="Killzone" parent="." instance=ExtResource("5_5gvrq")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
@@ -374,5 +378,3 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_ttj4a")
 theme_override_font_sizes/font_size = 8
 text = "You did it!"
-
-[node name="UI" parent="." instance=ExtResource("10_y6l3y")]
