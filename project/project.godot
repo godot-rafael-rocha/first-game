@@ -22,7 +22,6 @@ Music="*res://scenes/music.tscn"
 [display]
 
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 window/handheld/orientation=4
 
 [input]
