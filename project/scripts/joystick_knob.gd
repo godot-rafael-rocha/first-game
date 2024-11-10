@@ -62,11 +62,17 @@ func calculateVector():
 	if abs((global_position.y - parent.global_position.y)) >= deadzone:
 		parent.posVector.y = (global_position.y - parent.global_position.x)/maxLength
 
-func _on_button_button_down() -> void:
-	print("Button Down!")
+#func _on_button_button_down() -> void:
+	#pressing = true
+#
+#
+#func _on_button_button_up() -> void:
+	#pressing = false
+
+
+func _on_touch_screen_button_pressed() -> void:
 	pressing = true
 
 
-func _on_button_button_up() -> void:
-	print("Button UP!")
+func _on_touch_screen_button_released() -> void:
 	pressing = false
