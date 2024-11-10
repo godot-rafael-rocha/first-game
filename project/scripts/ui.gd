@@ -8,4 +8,4 @@ func _ready():
 func isMobile() -> bool:
 	var osName = OS.get_name()
 	
-	return osName == "Android" or osName == "iOS";
+	return osName == "Android" || osName == "iOS" || OS.has_feature("web_android") or OS.has_feature("web_ios")
