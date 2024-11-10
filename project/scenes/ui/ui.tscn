@@ -1,14 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://4au3abyy3ug6"]
+[gd_scene load_steps=4 format=3 uid="uid://4au3abyy3ug6"]
 
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_5md30"]
 [ext_resource type="PackedScene" uid="uid://dxh45v7tvmpxd" path="res://scenes/ui/components/joystick.tscn" id="1_15v3g"]
 [ext_resource type="PackedScene" uid="uid://xb0aqou81e3w" path="res://scenes/ui/components/a_button.tscn" id="2_pu8w2"]
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("1_5md30")
 
-[node name="joystick" parent="." instance=ExtResource("1_15v3g")]
+[node name="mobile_gamepad" type="Node2D" parent="."]
+
+[node name="joystick" parent="mobile_gamepad" instance=ExtResource("1_15v3g")]
 position = Vector2(131, 538)
 scale = Vector2(5, 5)
 
-[node name="a_button" parent="." instance=ExtResource("2_pu8w2")]
+[node name="a_button" parent="mobile_gamepad" instance=ExtResource("2_pu8w2")]
 position = Vector2(1038, 556)
 scale = Vector2(5, 5)
