@@ -26,7 +26,7 @@ window/handheld/orientation=4
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/InteractiveContainerPlugin/plugin.cfg", "res://addons/custom_touch_screen_button_plugin/plugin.cfg", "res://addons/touch_screen_button_overwrite_plugin/plugin.cfg")
+enabled=PackedStringArray("res://addons/InteractiveContainerPlugin/plugin.cfg", "res://addons/touch_screen_button_overwrite_plugin/plugin.cfg")
 
 [input]
 
@@ -51,6 +51,7 @@ move_right={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
 
 [rendering]
 

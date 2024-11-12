@@ -8,7 +8,7 @@ func _ready():
 	mobile_gamepad.visible = _isMobile()
 
 func _isMobile() -> bool:
-	#return true
+	return true
 	var osName = OS.get_name()
 	
 	return osName == "Android" || osName == "iOS" || OS.has_feature("web_android") or OS.has_feature("web_ios")
