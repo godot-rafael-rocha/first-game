@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://qekenyx1dd7t"]
+
+[ext_resource type="Script" path="res://addons/InteractiveContainerPlugin/interactive_container.gd" id="1_2wfp6"]
+
+[node name="InteractiveContainer" type="MarginContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_2wfp6")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
