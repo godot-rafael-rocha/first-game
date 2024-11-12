@@ -1,8 +1,7 @@
 extends Sprite2D
 
 @onready var parent: Node2D = $".."
-
-var pressing = false
+@onready var touch_screen_button_overwrite: TouchScreenButtonOverwrite = $"../TouchScreenButtonOverwrite"
 
 enum moveActionEnum {
 	LEFT,
@@ -27,11 +26,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var newAction: moveActionEnum = moveActionEnum.IDLE
-	if pressing:
-		if get_global_mouse_position().distance_to(parent.global_position) <= maxLength:
-			global_position = get_global_mouse_position()
+	var pointerPosition = touch_screen_button_overwrite.get_pointer_position()
+	var isPressed = touch_screen_button_overwrite.is_pressed()
+	if isPressed && pointerPosition:
+		if pointerPosition.distance_to(parent.global_position) <= maxLength:
+			global_position = pointerPosition
 		else:
-			var angle = parent.global_position.angle_to_point(get_global_mouse_position())
+			var angle = parent.global_position.angle_to_point(pointerPosition)
 			global_position.x = parent.global_position.x + cos(angle) * maxLength
 			global_position.y = parent.global_position.y + sin(angle) * maxLength
 		calculateVector()
@@ -48,10 +49,10 @@ func _process(delta: float) -> void:
 func InputAction(newAction: moveActionEnum):
 	if newAction != lastAction:
 		if moveActionValues[lastAction] && Input.is_action_pressed(moveActionValues[lastAction]):
-			print("action_release: ", moveActionValues[lastAction])
+			#print("action_release: ", moveActionValues[lastAction])
 			Input.action_release(moveActionValues[lastAction])
 		if moveActionValues[newAction] && !Input.is_action_pressed(moveActionValues[newAction]):
-			print("action_press: ", moveActionValues[newAction])
+			#print("action_press: ", moveActionValues[newAction])
 			Input.action_press(moveActionValues[newAction])
 		lastAction = newAction
 
@@ -61,18 +62,3 @@ func calculateVector():
 		parent.posVector.x = (global_position.x - parent.global_position.x)/maxLength
 	if abs((global_position.y - parent.global_position.y)) >= deadzone:
 		parent.posVector.y = (global_position.y - parent.global_position.x)/maxLength
-
-#func _on_button_button_down() -> void:
-	#pressing = true
-#
-#
-#func _on_button_button_up() -> void:
-	#pressing = false
-
-
-func _on_touch_screen_button_pressed() -> void:
-	pressing = true
-
-
-func _on_touch_screen_button_released() -> void:
-	pressing = false

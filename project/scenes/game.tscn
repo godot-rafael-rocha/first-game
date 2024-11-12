@@ -1,8 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://d0xy6g2hevid2"]
+[gd_scene load_steps=18 format=3 uid="uid://d0xy6g2hevid2"]
 
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_5fk55"]
 [ext_resource type="PackedScene" uid="uid://c7e5161ft7xfr" path="res://scenes/player.tscn" id="1_uwj6i"]
-[ext_resource type="FontFile" uid="uid://kh14gsqbvk3o" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_0qeyq"]
 [ext_resource type="Texture2D" uid="uid://c2kh0lx7amc5e" path="res://assets/sprites/world_tileset.png" id="2_6x0pj"]
 [ext_resource type="PackedScene" uid="uid://xenjt7c7k3eq" path="res://scenes/platform.tscn" id="3_8yr6l"]
 [ext_resource type="PackedScene" uid="uid://c8qf3trvj0cn7" path="res://scenes/coin.tscn" id="4_g0a0y"]
@@ -258,20 +256,6 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("1_5fk55")
-
-[node name="ScoreLabel" type="Label" parent="GameManager"]
-offset_left = 530.0
-offset_top = 33.0
-offset_right = 596.0
-offset_bottom = 56.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_0qeyq")
-theme_override_font_sizes/font_size = 8
-text = "Score: 0"
-
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(2, -16)
 tile_set = SubResource("TileSet_1a05h")
@@ -354,6 +338,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_ttj4a")
 theme_override_font_sizes/font_size = 8
 text = "Space to jump."
+metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="Labels"]
 offset_left = 363.0
@@ -364,6 +349,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_ttj4a")
 theme_override_font_sizes/font_size = 8
 text = "Falling Hurts..."
+metadata/_edit_use_anchors_ = true
 
 [node name="Label3" type="Label" parent="Labels"]
 offset_left = 528.0
@@ -374,5 +360,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_ttj4a")
 theme_override_font_sizes/font_size = 8
 text = "You did it!"
+metadata/_edit_use_anchors_ = true
 
 [node name="UI" parent="." instance=ExtResource("10_y6l3y")]

@@ -12,19 +12,55 @@ signal pressed_position_change(value: bool)
 func _input(event: InputEvent) -> void:
 	_handleEvent(event)
 
-func is_hovering(position: Vector2):
-	var isInsideX = position.x >= global_position.x && position.x <= global_position.x + size.x
-	var isInsideY = position.y >= global_position.y && position.y <= global_position.y + size.y
-	return isInsideX && isInsideY
+#func _get_flat_children():
+	#for i in arr:
+		#if typeof(i) == TYPE_ARRAY:
+			#_get_flat_children(i)
+		#else:
+			#simple_array.append(i)
+
+func is_hovering(event: InputEvent):
+	if !"global_position" in event:
+		return false
+		
+	var check_self = false
+	if check_self:
+		var isInsideX = event.global_position.x >= self.global_position.x && event.global_position.x <= self.global_position.x + size.x
+		var isInsideY = event.global_position.y >= self.global_position.y && event.global_position.y <= self.global_position.y + size.y
+		return isInsideX && isInsideY
+	else:
+		var result = false
+		var recursionDetails = {
+		}
+		var recursionName = 'check'
+		recursionDetails.check = func(node: Node) -> void:
+			for child in node.get_children():
+				if result:
+					break
+				elif "global_position" in child && "size" in child:
+					var isInsideX = event.global_position.x >= child.global_position.x && event.global_position.x <= child.global_position.x + child.size.x
+					var isInsideY = event.global_position.y >= child.global_position.y && event.global_position.y <= child.global_position.y + child.size.y
+					result = isInsideX && isInsideY
+				else:
+					recursionDetails.get(recursionName).call(child)
+					
+				print("clicked: ", {
+					"result": result,
+					"child": child,
+					"child.global_position": child.global_position,
+					"child.size": null if !"size" in child else child.size
+				})
+		recursionDetails.get(recursionName).call(self)
+		return result
 
 func _handleEvent(event: InputEvent):
 	if event is InputEventMouseButton:
-		if event.is_pressed() && is_hovering(event.position):
+		if event.is_pressed() && is_hovering(event):
 			lastInputEventMouseButton = event
 		elif !event.is_pressed() && lastInputEventMouseButton && "is_pressed" in lastInputEventMouseButton && lastInputEventMouseButton.is_pressed():
 			lastInputEventMouseButton = event
 	elif event is InputEventScreenTouch:
-		if event.is_pressed() && is_hovering(event.position):
+		if event.is_pressed() && is_hovering(event):
 			inputEventScreenTouchDictionary[event.index] = event
 		elif !event.is_pressed():
 			inputEventScreenTouchDictionary.erase(event.index)
@@ -54,7 +90,7 @@ func _updatePressedState() -> void:
 	var newPressedValue = isMousePressed || inputEventScreenTouchDictionary.size() > 0
 	
 	if _is_pressed_state != newPressedValue:
-		print('is_pressed_state_change from: ', _is_pressed_state, " to: ", newPressedValue)
+		#print('is_pressed_state_change from: ', _is_pressed_state, " to: ", newPressedValue)
 		_is_pressed_state = newPressedValue
 		emit_signal("is_pressed_state_change", _is_pressed_state)
 
@@ -91,6 +127,6 @@ func _update_pressing_position() -> void:
 			getLowestIndexPosition.call(inputEventScreenDragDictionary) || getLowestIndexPosition.call(inputEventScreenTouchDictionary)
 	
 	if new_pressing_position_value && new_pressing_position_value != _pressing_position:
-		print('pressed_position_change from: ', _pressing_position, " to: ", new_pressing_position_value)
+		#print('pressed_position_change from: ', _pressing_position, " to: ", new_pressing_position_value)
 		_pressing_position = new_pressing_position_value
 		emit_signal("pressed_position_change", _pressing_position)

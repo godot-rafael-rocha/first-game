@@ -1,24 +1,112 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxh45v7tvmpxd"]
+[gd_scene load_steps=6 format=3 uid="uid://c1oq7n3l3pcmg"]
 
-[ext_resource type="Script" path="res://scripts/joystick.gd" id="1_auoi1"]
-[ext_resource type="Texture2D" uid="uid://bidhxucp2kd66" path="res://assets/sprites/joystick/joyring.png" id="2_0ah50"]
-[ext_resource type="Texture2D" uid="uid://hg42snfhm6ei" path="res://assets/sprites/joystick/joyknobpng.png" id="3_nduxk"]
-[ext_resource type="Script" path="res://scripts/joystick_knob.gd" id="4_5aml2"]
+[sub_resource type="GDScript" id="GDScript_7cf7a"]
+script/source = "extends Node2D
+
+var posVector: Vector2
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0riv2"]
+load_path = "res://.godot/imported/joyring.png-7f561eeaf385862cffeb9766e52b68dc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_088pd"]
+load_path = "res://.godot/imported/joyknobpng.png-052962312e22887530c186c968b0e692.ctex"
+
+[sub_resource type="GDScript" id="GDScript_pl4f1"]
+script/source = "extends Sprite2D
+
+@onready var parent: Node2D = $\"..\"
+
+var pressing = false
+
+enum moveActionEnum {
+	LEFT,
+	RIGHT,
+	IDLE
+}
+
+const moveActionValues = [
+	\"move_left\",
+	\"move_right\",
+	null
+]
+
+@export var maxLength = 9
+@export var deadzone = 5
+var lastAction: moveActionEnum = moveActionEnum.IDLE
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	maxLength *= parent.scale.x
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	var newAction: moveActionEnum = moveActionEnum.IDLE
+	if pressing:
+		if get_global_mouse_position().distance_to(parent.global_position) <= maxLength:
+			global_position = get_global_mouse_position()
+		else:
+			var angle = parent.global_position.angle_to_point(get_global_mouse_position())
+			global_position.x = parent.global_position.x + cos(angle) * maxLength
+			global_position.y = parent.global_position.y + sin(angle) * maxLength
+		calculateVector()
+		if parent.posVector.x > 0:
+			newAction = moveActionEnum.RIGHT
+		elif parent.posVector.x < 0:
+			newAction = moveActionEnum.LEFT 
+	else:
+		global_position = lerp(global_position, parent.global_position, delta * 50)
+		parent.posVector = Vector2(0, 0)
+		
+	InputAction(newAction)
+
+func InputAction(newAction: moveActionEnum):
+	if newAction != lastAction:
+		if moveActionValues[lastAction] && Input.is_action_pressed(moveActionValues[lastAction]):
+			#print(\"action_release: \", moveActionValues[lastAction])
+			Input.action_release(moveActionValues[lastAction])
+		if moveActionValues[newAction] && !Input.is_action_pressed(moveActionValues[newAction]):
+			#print(\"action_press: \", moveActionValues[newAction])
+			Input.action_press(moveActionValues[newAction])
+		lastAction = newAction
+
+
+func calculateVector():
+	if abs((global_position.x - parent.global_position.x)) >= deadzone:
+		parent.posVector.x = (global_position.x - parent.global_position.x)/maxLength
+	if abs((global_position.y - parent.global_position.y)) >= deadzone:
+		parent.posVector.y = (global_position.y - parent.global_position.x)/maxLength
+
+#func _on_button_button_down() -> void:
+	#pressing = true
+#
+#
+#func _on_button_button_up() -> void:
+	#pressing = false
+
+
+func _on_touch_screen_button_pressed() -> void:
+	pressing = true
+
+
+func _on_touch_screen_button_released() -> void:
+	pressing = false
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_74qd3"]
 radius = 14.0
 
 [node name="joystick" type="Node2D"]
-script = ExtResource("1_auoi1")
+script = SubResource("GDScript_7cf7a")
 
 [node name="Joyring" type="Sprite2D" parent="."]
 scale = Vector2(0.015, 0.015)
-texture = ExtResource("2_0ah50")
+texture = SubResource("CompressedTexture2D_0riv2")
 
 [node name="JoystickKnob" type="Sprite2D" parent="."]
 scale = Vector2(0.005, 0.005)
-texture = ExtResource("3_nduxk")
-script = ExtResource("4_5aml2")
+texture = SubResource("CompressedTexture2D_088pd")
+script = SubResource("GDScript_pl4f1")
 
 [node name="Button" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)

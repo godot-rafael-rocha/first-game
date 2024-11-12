@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hg42snfhm6ei"
-path="res://.godot/imported/joyknobpng.png-052962312e22887530c186c968b0e692.ctex"
+uid="uid://babwxh8bepm4s"
+path="res://.godot/imported/joyring.png-6eef87a7632026ef8bd3dce5466b10e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/joystick/joyknobpng.png"
-dest_files=["res://.godot/imported/joyknobpng.png-052962312e22887530c186c968b0e692.ctex"]
+source_file="res://scenes/ui/components/joystick/joyring.png"
+dest_files=["res://.godot/imported/joyring.png-6eef87a7632026ef8bd3dce5466b10e4.ctex"]
 
 [params]
 
