@@ -36,7 +36,7 @@ func _update_pointer_position(is_pressed_arg: bool):
 			newfingerIndex = event.index
 			newpointerPosition = event.position
 		elif lastPointerPosition && event is InputEventScreenDrag:
-			if !lastfingerIndex == event.index:
+			if lastfingerIndex == event.index:
 				newfingerIndex = event.index
 				newpointerPosition = event.position
 			
