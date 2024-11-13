@@ -17,6 +17,7 @@ signal pause_menu_visible_state_changed(visible: bool)
 
 func _ready():
 	mobile_gamepad.visible = _isMobile()
+	game_menu.visible = _show_game_menu
 	
 	debug_node.visible = _debug
 	if (_debug):
@@ -48,3 +49,4 @@ func _input(event: InputEvent) -> void:
 		score_label.visible = !_show_game_menu
 		game_menu.visible = _show_game_menu
 		pause_menu_visible_state_changed.emit(_show_game_menu)
+		get_tree().paused = _show_game_menu

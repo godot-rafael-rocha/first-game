@@ -257,6 +257,7 @@ _data = {
 [node name="Game" type="Node2D"]
 
 [node name="UI" parent="." instance=ExtResource("10_y6l3y")]
+process_mode = 3
 
 [node name="GamePlayScenes" type="Node2D" parent="."]
 

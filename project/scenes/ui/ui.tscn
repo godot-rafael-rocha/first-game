@@ -11,6 +11,15 @@ script = ExtResource("1_5md30")
 
 [node name="GameMenu" parent="." instance=ExtResource("2_q5jal")]
 
+[node name="PausedLabel" type="Label" parent="GameMenu"]
+offset_left = 395.0
+offset_top = 270.0
+offset_right = 779.0
+offset_bottom = 334.0
+theme_override_fonts/font = ExtResource("4_fins5")
+theme_override_font_sizes/font_size = 64
+text = "Paused"
+
 [node name="mobile_gamepad" type="Node2D" parent="."]
 position = Vector2(3, 1)
 
