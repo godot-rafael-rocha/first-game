@@ -18,6 +18,10 @@ func _ready() -> void:
 		self.pressed.connect(func (): print("pressed"))
 		self.released.connect(func (): print("released"))
 
+func _input(event: InputEvent) -> void:
+	lastInputEvent = event
+	_update_pointer_position(is_pressed())
+
 func _update_pointer_position(is_pressed_arg: bool):
 	var event = lastInputEvent
 	var lastPointerPosition = pointerDictionary.get(pointerDictionaryPropertiesName.pointerPosition);
@@ -44,9 +48,6 @@ func _update_pointer_position(is_pressed_arg: bool):
 		pointerDictionary[pointerDictionaryPropertiesName.fingerIndex] = newfingerIndex
 		emit_signal("pointer_position_changed", event)
 
-func _input(event: InputEvent) -> void:
-	lastInputEvent = event
-	_update_pointer_position(is_pressed())
 
 func get_pointer_position() -> Vector2:
 	var result = pointerDictionary.get(pointerDictionaryPropertiesName.pointerPosition)

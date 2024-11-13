@@ -16,12 +16,23 @@ const moveActionValues = [
 ]
 
 @export var maxLength = 9
-@export var deadzone = 5
+@export var deadzone = 25
 var lastAction: moveActionEnum = moveActionEnum.IDLE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	maxLength *= parent.scale.x
+	
+	for enumValue in moveActionEnum.values():
+		var inputKey = moveActionValues[enumValue];
+		if inputKey:
+			print(enumValue)
+			var isTouchPressed = touch_screen_button_overwrite.is_pressed()
+			var isInputPressed = Input.is_action_pressed(inputKey)
+			if isTouchPressed && isInputPressed:
+				lastAction = enumValue
+			else:
+				Input.action_release(inputKey)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

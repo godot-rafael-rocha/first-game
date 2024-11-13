@@ -4,10 +4,20 @@ extends CharacterBody2D
 const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+var _is_double_jump_used = false
 
 func _physics_process(delta: float) -> void:
 	# Variables
-	var isJumpStarting = Input.is_action_just_pressed("jump") && is_on_floor()
+	var isJumpStarting = false
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor():
+			isJumpStarting = true
+		elif !_is_double_jump_used:
+			isJumpStarting = true
+			_is_double_jump_used = true
+	
+	if is_on_floor():
+		_is_double_jump_used = false
 	
 	# Add the gravity.
 	if not is_on_floor():
