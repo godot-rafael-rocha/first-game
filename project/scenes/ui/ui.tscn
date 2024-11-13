@@ -1,23 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://4au3abyy3ug6"]
+[gd_scene load_steps=6 format=3 uid="uid://4au3abyy3ug6"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_5md30"]
 [ext_resource type="PackedScene" uid="uid://xb0aqou81e3w" path="res://scenes/ui/components/a_button.tscn" id="2_pu8w2"]
+[ext_resource type="PackedScene" uid="uid://krsa6ua83qud" path="res://scenes/ui/components/game_menu/game_menu.tscn" id="2_q5jal"]
 [ext_resource type="FontFile" uid="uid://kh14gsqbvk3o" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_fins5"]
 [ext_resource type="PackedScene" uid="uid://cj030tg7f0pk" path="res://scenes/ui/components/joystick/joystick.tscn" id="4_gdn3e"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_5md30")
 
+[node name="GameMenu" parent="." instance=ExtResource("2_q5jal")]
+
 [node name="mobile_gamepad" type="Node2D" parent="."]
 position = Vector2(3, 1)
 
 [node name="a_button" parent="mobile_gamepad" instance=ExtResource("2_pu8w2")]
-position = Vector2(1038, 556)
-scale = Vector2(5, 5)
+position = Vector2(1029, 529)
+scale = Vector2(8, 8)
 
 [node name="joystick" parent="mobile_gamepad" instance=ExtResource("4_gdn3e")]
-position = Vector2(131, 538)
-scale = Vector2(5, 5)
+position = Vector2(131, 522)
+scale = Vector2(8, 8)
 
 [node name="ScoreLabel" type="Label" parent="."]
 offset_left = 49.0
@@ -28,20 +31,23 @@ theme_override_fonts/font = ExtResource("4_fins5")
 theme_override_font_sizes/font_size = 16
 text = "Score: 0"
 
-[node name="Label" type="Label" parent="."]
-offset_left = 53.0
-offset_top = 339.0
+[node name="Debug" type="Node2D" parent="."]
+position = Vector2(21, 322)
+
+[node name="Label" type="Label" parent="Debug"]
+offset_left = 1.0
+offset_top = 6.0
 offset_right = 169.0
-offset_bottom = 362.0
+offset_bottom = 29.0
 theme_override_fonts/font = ExtResource("4_fins5")
 theme_override_font_sizes/font_size = 16
 text = "Is pressed: "
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 55.0
-offset_top = 380.0
-offset_right = 307.0
-offset_bottom = 403.0
+[node name="Label2" type="Label" parent="Debug"]
+offset_left = 3.0
+offset_top = 47.0
+offset_right = 255.0
+offset_bottom = 70.0
 theme_override_fonts/font = ExtResource("4_fins5")
 theme_override_font_sizes/font_size = 16
 text = "Pointer Position: "
