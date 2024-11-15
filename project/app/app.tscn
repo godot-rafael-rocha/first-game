@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c45wxj0fin00x"]
+
+[ext_resource type="PackedScene" uid="uid://0wd7ashudlu3" path="res://environments/maps/tutorial/tutorial.tscn" id="2_8j0c7"]
+
+[node name="App" type="Node2D"]
+
+[node name="Tutorial" parent="." instance=ExtResource("2_8j0c7")]

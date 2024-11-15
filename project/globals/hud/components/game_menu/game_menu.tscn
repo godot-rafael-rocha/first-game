@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://do8s7ao7a3qla"]
+
+[ext_resource type="FontFile" uid="uid://kh14gsqbvk3o" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_k8nk2"]
+
+[node name="GameMenu" type="Node2D"]
+
+[node name="PausedLabel" type="Label" parent="."]
+offset_left = 395.0
+offset_top = 270.0
+offset_right = 779.0
+offset_bottom = 334.0
+theme_override_fonts/font = ExtResource("1_k8nk2")
+theme_override_font_sizes/font_size = 64
+text = "Paused"

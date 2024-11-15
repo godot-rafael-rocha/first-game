@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbeejpve5jqxv"]
+
+[ext_resource type="Script" path="res://globals/hud/components/virtual_gamepad/joystick/joystick.gd" id="1_k65ed"]
+[ext_resource type="Script" path="res://globals/hud/components/virtual_gamepad/joystick/joystick_knob.gd" id="2_dwt8c"]
+[ext_resource type="Texture2D" uid="uid://cbdyyqxaww623" path="res://globals/hud/components/virtual_gamepad/joystick/joyknobpng.png" id="2_xps0f"]
+[ext_resource type="Script" path="res://addons/touch_screen_button_overwrite_plugin/touch_screen_button_overwrite.gd" id="3_a8lfc"]
+[ext_resource type="Texture2D" uid="uid://dtheywxg5v2di" path="res://globals/hud/components/virtual_gamepad/joystick/joyring.png" id="5_rjn3i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mfrtx"]
+custom_solver_bias = 1.0
+radius = 900.0
+
+[node name="Joystick" type="Node2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_k65ed")
+
+[node name="JoystickKnob" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_xps0f")
+script = ExtResource("2_dwt8c")
+
+[node name="TouchScreenButtonOverwrite" type="TouchScreenButton" parent="."]
+shape = SubResource("CircleShape2D_mfrtx")
+script = ExtResource("3_a8lfc")
+
+[node name="JoystickRing" type="Sprite2D" parent="."]
+texture = ExtResource("5_rjn3i")

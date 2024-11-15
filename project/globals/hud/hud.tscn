@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://djf1h0mpykur1"]
+
+[ext_resource type="Script" path="res://globals/hud/hud.gd" id="1_aivp0"]
+[ext_resource type="PackedScene" uid="uid://do8s7ao7a3qla" path="res://globals/hud/components/game_menu/game_menu.tscn" id="2_5r3dk"]
+[ext_resource type="PackedScene" uid="uid://dc13n0s71j5sn" path="res://globals/hud/components/virtual_gamepad/buttons/a_button.tscn" id="3_0xfnm"]
+[ext_resource type="FontFile" uid="uid://kh14gsqbvk3o" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_6m70c"]
+[ext_resource type="PackedScene" uid="uid://cbeejpve5jqxv" path="res://globals/hud/components/virtual_gamepad/joystick/joystick.tscn" id="6_lsfgf"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_aivp0")
+
+[node name="GameMenu" parent="." instance=ExtResource("2_5r3dk")]
+
+[node name="VirtualGamepad" type="Node2D" parent="."]
+position = Vector2(3, 1)
+
+[node name="a_button" parent="VirtualGamepad" instance=ExtResource("3_0xfnm")]
+position = Vector2(1024, 530)
+scale = Vector2(8, 8)
+
+[node name="Joystick" parent="VirtualGamepad" instance=ExtResource("6_lsfgf")]
+position = Vector2(126, 525)
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 49.0
+offset_top = 34.0
+offset_right = 165.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("3_6m70c")
+theme_override_font_sizes/font_size = 16
+text = "Score: 0"
+
+[node name="Debug" type="Node2D" parent="."]
+position = Vector2(21, 322)
+
+[node name="Label" type="Label" parent="Debug"]
+offset_left = 1.0
+offset_top = 6.0
+offset_right = 169.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("3_6m70c")
+theme_override_font_sizes/font_size = 16
+text = "Is pressed: "
+
+[node name="Label2" type="Label" parent="Debug"]
+offset_left = 3.0
+offset_top = 47.0
+offset_right = 255.0
+offset_bottom = 70.0
+theme_override_fonts/font = ExtResource("3_6m70c")
+theme_override_font_sizes/font_size = 16
+text = "Pointer Position: "
